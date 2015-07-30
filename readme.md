@@ -1,12 +1,18 @@
 # DOS to UNIX and UNIX to DOS file converter
 
-This python script is used to make converion between dos and unix file formats
+This python script is used to make conversion between dos and unix file formats
 
-How to use:
+## How to use
 
-    python dos2unix.py fileName [option]
-    
-Options:
-    
-    -d    Default, DOS to UNIX converion
-    -u    UNIX to DOS convertion
+```
+usage: dos2unix.py [-h] [-d] file
+
+Dos to Unix file converter
+
+positional arguments:
+  file            Path to file to be converted
+
+optional arguments:
+  -h, --help      show this help message and exit
+  -d, --unix2dos  Unix to Dos convection
+```

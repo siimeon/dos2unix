@@ -1,40 +1,36 @@
-#! /usr/bin/env python
-'''
+#!/usr/bin/python
+
+import argparse
+
+"""
 dos2unix.py dos to unix or unix to dos file converter
-'''
+"""
+
+
 def dos2unix(name):
-	data = open(name, 'r').read()
-	open(name, 'w').write(data.replace('\r\n', '\n' ))
+    data = open(name, 'r').read()
+    open(name, 'w').write(data.replace('\r\n', '\n'))
+
 
 def unix2dos(name):
-	data = open(name, 'r').read()
-	open(name, 'w').write(data.replace('\n', '\r\n'))
+    data = open(name, 'r').read()
+    open(name, 'w').write(data.replace('\n', '\r\n'))
 
-def help():
-	print 'dos2unix.py'
-	print 'Arguments: dos2unix.py fileName [option]'
-	print 'Options:'
-	print '-d 	Default, dos to unix file conversion'
-	print '-u 	unix to dos conversion'
+
+def cli_controller():
+    parser = argparse.ArgumentParser(description='Dos to Unix file converter')
+    parser.add_argument('file',
+                        help="Path to file to be converted")
+    parser.add_argument('-d',
+                        '--unix2dos',
+                        action='store_true',
+                        help='Unix to Dos convection')
+    arguments = parser.parse_args()
+    if arguments.unix2dos:
+        unix2dos(arguments.file)
+    else:
+        dos2unix(arguments.file)
 
 
 if __name__ == '__main__':
-	'''
-	Arguments: dos2unix.py fileName [option]
-	Options:
-		-d 		Default, convert dos file to unix
-		-u 		Convert unix file to dos
-	'''
-	import sys
-	if len(sys.argv) in [2, 3]:
-		if len(sys.argv) == 2:
-			pass
-		elif sys.argv[2] == '-d':
-			dos2unix(sys.argv[1])
-		elif sys.argv[2] == '-u':
-			unix2dos(sys.argv[1])
-		else:
-			help()
-	else:
-		help()
-		
+    cli_controller()
